@@ -1,10 +1,296 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="facebook-domain-verification" content="5x6n8nweyqfmkcw474l81uzryia2zu" />
-  <title>Welcome to Era of Tharuna</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tharuna Rajpurohit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--bg2:#0f0f0f;--bg3:#161616;--line:rgba(255,255,255,0.06);--dim:rgba(255,255,255,0.28);--mid:rgba(255,255,255,0.58);--bright:rgba(255,255,255,0.92);--accent:#c8a96e;--accent2:#7eb8a4;--serif:'Playfair Display',Georgia,serif;--sans:'Inter',sans-serif;--mono:'DM Mono',monospace;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--mid);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;}
+
+/* Noise */
+body::before{content:'';position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px;}
+
+/* Cursor */
+#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.2s;}
+#cur2{position:fixed;width:36px;height:36px;border:1px solid rgba(200,169,110,0.28);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.8rem 3rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid transparent;transition:border-color 0.4s,background 0.4s;}
+nav.scrolled{border-color:var(--line);background:rgba(8,8,8,0.88);backdrop-filter:blur(20px);}
+.nav-logo{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;}
+.nav-links{display:flex;gap:2.5rem;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--bright);}
+
+/* Hero */
+#hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:0 3rem;position:relative;overflow:hidden;}
+.hero-bg-letter{position:absolute;right:-0.04em;bottom:-0.08em;font-family:var(--serif);font-size:42vw;font-weight:400;color:rgba(255,255,255,0.016);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.05em;}
+.hero-content{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:5rem;position:relative;z-index:1;}
+.hero-eyebrow{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:1.8rem;opacity:0;animation:riseIn 1s ease forwards 0.4s;}
+.hero-name{font-family:var(--serif);font-size:clamp(4rem,10vw,9rem);font-weight:400;line-height:0.92;color:var(--bright);letter-spacing:-0.02em;opacity:0;animation:riseIn 1.2s cubic-bezier(0.16,1,0.3,1) forwards 0.65s;}
+.hero-name em{font-style:italic;color:var(--accent);display:block;}
+.hero-sub{margin-top:2.5rem;display:flex;align-items:center;gap:2rem;opacity:0;animation:riseIn 1s ease forwards 1.05s;}
+.hero-line{width:55px;height:1px;background:linear-gradient(to right,var(--accent),transparent);flex-shrink:0;}
+.hero-sub-text{font-size:0.88rem;color:var(--dim);max-width:360px;line-height:1.75;}
+.hero-sub-text strong{color:var(--mid);font-weight:400;}
+.hero-meta{display:flex;gap:3rem;padding:2rem 0;border-top:1px solid var(--line);position:relative;z-index:1;opacity:0;animation:riseIn 1s ease forwards 1.3s;flex-wrap:wrap;}
+.meta-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.25em;color:var(--dim);text-transform:uppercase;margin-bottom:0.3rem;}
+.meta-value{font-size:0.82rem;color:var(--mid);}
+.meta-value span{color:var(--accent);}
+.hero-scroll{position:absolute;right:3rem;bottom:3rem;writing-mode:vertical-rl;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.2em;color:var(--dim);text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;opacity:0;animation:fadeIn 1s ease forwards 1.8s;}
+.scroll-bar{width:1px;height:48px;background:linear-gradient(to bottom,var(--accent),transparent);animation:sPulse 2s ease-in-out infinite;}
+@keyframes sPulse{0%,100%{height:48px;opacity:0.4}50%{height:68px;opacity:1}}
+@keyframes riseIn{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Sections */
+section{padding:8rem 3rem;position:relative;}
+.s-inner{max-width:1080px;margin:0 auto;}
+.s-header{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line);}
+.s-num{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;color:var(--accent);}
+.s-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--bright);}
+.s-title em{font-style:italic;color:var(--accent);}
+
+/* About */
+#about{background:var(--bg2);}
+.about-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:6rem;align-items:start;}
+@media(max-width:760px){.about-layout{grid-template-columns:1fr;gap:3rem;}}
+.about-statement{font-family:var(--serif);font-size:1.55rem;font-weight:400;line-height:1.55;color:var(--bright);letter-spacing:-0.01em;}
+.about-statement em{font-style:italic;color:var(--accent);}
+.about-detail p{font-size:0.88rem;line-height:1.85;color:var(--dim);margin-bottom:1.2rem;}
+.about-detail strong{color:var(--mid);font-weight:400;}
+.about-numbers{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:3rem;border:1px solid var(--line);background:var(--line);}
+.an-item{background:var(--bg2);padding:1.4rem;}
+.an-big{font-family:var(--serif);font-size:2.1rem;color:var(--accent);line-height:1;margin-bottom:0.35rem;}
+.an-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.15em;color:var(--dim);text-transform:uppercase;}
+
+/* Experience */
+.exp-list{display:flex;flex-direction:column;}
+.exp-item{display:grid;grid-template-columns:170px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--line);}
+.exp-item:first-child{border-top:1px solid var(--line);}
+@media(max-width:680px){.exp-item{grid-template-columns:1fr;gap:1rem;}}
+.exp-period{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.4rem;}
+.exp-company{font-size:0.76rem;color:var(--dim);}
+.exp-loc{font-family:var(--mono);font-size:0.58rem;color:rgba(255,255,255,0.18);margin-top:0.2rem;}
+.exp-role{font-family:var(--serif);font-size:1.25rem;color:var(--bright);margin-bottom:0.7rem;font-weight:400;}
+.exp-desc{font-size:0.84rem;line-height:1.82;color:var(--dim);}
+
+/* Projects */
+#projects{background:var(--bg2);}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);}
+@media(max-width:680px){.proj-grid{grid-template-columns:1fr;}}
+.proj-item{background:var(--bg2);padding:2.5rem;transition:background 0.3s;position:relative;overflow:hidden;}
+.proj-item:hover{background:var(--bg3);}
+.proj-item::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);}
+.proj-item:hover::after{transform:scaleX(1);}
+.proj-cat{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.9rem;}
+.proj-name{font-family:var(--serif);font-size:1.18rem;color:var(--bright);margin-bottom:0.75rem;font-weight:400;line-height:1.3;}
+.proj-desc{font-size:0.8rem;line-height:1.82;color:var(--dim);margin-bottom:1.1rem;}
+.proj-tech{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;color:rgba(255,255,255,0.2);}
+.proj-award{margin-top:1.1rem;padding:0.45rem 0.85rem;border:1px solid rgba(200,169,110,0.18);display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--accent);}
+.proj-n{position:absolute;bottom:1.2rem;right:1.8rem;font-family:var(--serif);font-size:4.5rem;font-weight:400;color:rgba(255,255,255,0.025);line-height:1;pointer-events:none;}
+
+/* Skills */
+.skills-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;}
+@media(max-width:760px){.skills-layout{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:480px){.skills-layout{grid-template-columns:1fr;}}
+.sk-cat-name{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.25em;color:var(--accent);text-transform:uppercase;margin-bottom:1.1rem;padding-bottom:0.7rem;border-bottom:1px solid var(--line);}
+.sk-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem;}
+.sk-list li{font-size:0.83rem;color:var(--dim);padding-left:1rem;position:relative;}
+.sk-list li::before{content:'—';position:absolute;left:0;color:rgba(200,169,110,0.35);font-size:0.68rem;}
+
+/* Achievements */
+#achievements{background:var(--bg2);}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
+@media(max-width:680px){.ach-grid{grid-template-columns:1fr;}}
+.ach-item{background:var(--bg2);padding:1.8rem 2.2rem;display:flex;align-items:flex-start;gap:1.2rem;transition:background 0.3s;}
+.ach-item:hover{background:var(--bg3);}
+.ach-mark{font-family:var(--mono);font-size:0.6rem;color:var(--accent);flex-shrink:0;padding-top:0.12rem;}
+.ach-body strong{display:block;font-size:0.85rem;color:var(--bright);font-weight:400;margin-bottom:0.28rem;line-height:1.4;}
+.ach-body span{font-size:0.72rem;color:var(--dim);}
+
+/* Contact */
+#contact{min-height:55vh;display:flex;flex-direction:column;justify-content:center;}
+.contact-big{font-family:var(--serif);font-size:clamp(3rem,8vw,7rem);font-weight:400;line-height:0.95;color:var(--bright);letter-spacing:-0.02em;margin-bottom:3rem;}
+.contact-big em{font-style:italic;color:var(--accent);display:block;}
+.contact-row{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.c-link{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;color:var(--dim);text-decoration:none;text-transform:uppercase;padding-bottom:2px;border-bottom:1px solid rgba(255,255,255,0.1);transition:color 0.2s,border-color 0.2s;}
+.c-link:hover{color:var(--accent);border-color:var(--accent);}
+.c-link.primary{color:var(--accent);border-color:rgba(200,169,110,0.35);}
+
+/* Footer */
+footer{padding:1.8rem 3rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.f-copy{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.15em;color:rgba(255,255,255,0.16);text-transform:uppercase;}
+.f-status{display:flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--accent);}
+.f-dot{width:5px;height:5px;background:var(--accent2);border-radius:50%;animation:fp 2.5s ease-in-out infinite;}
+@keyframes fp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(1.5)}}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:600px){
+  nav{padding:1.4rem 1.5rem;}
+  section{padding:5rem 1.5rem;}
+  #hero{padding:0 1.5rem;}
+  .hero-meta{gap:1.5rem;}
+  footer{padding:1.5rem;}
+}
+</style>
 </head>
 <body>
-  <h1>Hello from Tharuna!</h1>
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<nav id="nav">
+  <div class="nav-logo">T · Rajpurohit</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-letter">T</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">AI Associate Engineer · Coimbatore, India</p>
+    <h1 class="hero-name">Tharuna<em>Rajpurohit</em></h1>
+    <div class="hero-sub">
+      <div class="hero-line"></div>
+      <p class="hero-sub-text">Building <strong>intelligent systems</strong> from original ideas — RAG pipelines, voice agents, smart contract auditors, automation workflows. Currently at <strong>LiveSitter</strong>.</p>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div><div class="meta-label">Status</div><div class="meta-value"><span>Open</span> to Remote Roles</div></div>
+    <div><div class="meta-label">Recognition</div><div class="meta-value">Top <span>112</span> · Cardano Hackathon Asia</div></div>
+    <div><div class="meta-label">Graduating</div><div class="meta-value">BSc CS · <span>2026</span></div></div>
+    <div><div class="meta-label">CGPA</div><div class="meta-value"><span>8.39</span> · Avinashilingam</div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div>Scroll</div>
+</section>
+
+<section id="about">
+  <div class="s-inner">
+    <div class="s-header reveal"><span class="s-num">01</span><h2 class="s-title">About <em>Me</em></h2></div>
+    <div class="about-layout">
+      <div class="about-statement reveal">I build AI systems that solve <em>real problems</em> I've lived — not tutorial projects.</div>
+      <div class="about-detail reveal">
+        <p>My father runs a large wholesale business. I watched the team drown in customer queries about pricing and availability. I built a RAG bot to handle it. That's how I think — <strong>find the problem, build the fix.</strong></p>
+        <p>I've been working as an AI Associate Engineer at LiveSitter since mid-2024, working with computer vision systems in production. Before that, I spent 4+ years managing the family business — <strong>inventory, vendors, cash flow, everything.</strong></p>
+        <p>I don't have a perfect academic background. I have <strong>real shipping experience</strong>, a Top 112 global hackathon result, and projects with actual origin stories.</p>
+        <div class="about-numbers">
+          <div class="an-item"><div class="an-big">1+</div><div class="an-label">Year AI Engineering</div></div>
+          <div class="an-item"><div class="an-big">112</div><div class="an-label">Global Rank · Cardano</div></div>
+          <div class="an-item"><div class="an-big">4+</div><div class="an-label">Years Ops Experience</div></div>
+          <div class="an-item"><div class="an-big">8.39</div><div class="an-label">CGPA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="s-inner">
+    <div class="s-header reveal"><span class="s-num">02</span><h2 class="s-title">Work <em>Experience</em></h2></div>
+    <div class="exp-list">
+      <div class="exp-item reveal">
+        <div><div class="exp-period">Jul 2024 — Present</div><div class="exp-company">LiveSitter</div><div class="exp-loc">Remote</div></div>
+        <div><div class="exp-role">AI Associate Engineer</div><div class="exp-desc">Monitor real-time AI alert systems and analyze computer vision model outputs for production accuracy. Perform image annotation and labeling to improve training data quality. Provide structured feedback to improve ML model performance in live automated decision pipelines.</div></div>
+      </div>
+      <div class="exp-item reveal">
+        <div><div class="exp-period">2019 — Present</div><div class="exp-company">Family Enterprise</div><div class="exp-loc">On-site · Coimbatore</div></div>
+        <div><div class="exp-role">Business Operations Lead</div><div class="exp-desc">Managed large-scale wholesale and retail operations generating Rs. 30K–1.5L/day in revenue. Often sole operator across inventory management, vendor negotiation, and cash flow. Four years of this work directly shaped how I think about building AI tools — every project idea came from a real problem I witnessed here.</div></div>
+      </div>
+      <div class="exp-item reveal">
+        <div><div class="exp-period">Jun 2025</div><div class="exp-company">Abbas Group</div><div class="exp-loc">Remote</div></div>
+        <div><div class="exp-role">AI Automation Intern</div><div class="exp-desc">Built n8n automation workflows and Python scripts to eliminate repetitive business processes. Integrated OpenAI APIs into internal data pipelines.</div></div>
+      </div>
+      <div class="exp-item reveal">
+        <div><div class="exp-period">Jan — Mar 2025</div><div class="exp-company">YHills Technology</div><div class="exp-loc">Remote</div></div>
+        <div><div class="exp-role">Frontend Web Developer</div><div class="exp-desc">Built responsive UI components using HTML and CSS, improving cross-device usability and visual consistency.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="s-inner">
+    <div class="s-header reveal"><span class="s-num">03</span><h2 class="s-title">Selected <em>Projects</em></h2></div>
+    <div class="proj-grid">
+      <div class="proj-item reveal"><div class="proj-n">01</div><div class="proj-cat">Blockchain · Security</div><div class="proj-name">Cardano Smart Contract Auditor</div><div class="proj-desc">AI-powered security layer that detects code tampering in Cardano blockchain transactions. Auto-generates vulnerability reports for developers. Built in Aiken and Plutus — not Solidity.</div><div class="proj-tech">Python · Aiken · Plutus · AI APIs</div><div class="proj-award">✦ &nbsp;Top 112 Globally — Cardano Hackathon Asia IBW 2025</div></div>
+      <div class="proj-item reveal"><div class="proj-n">02</div><div class="proj-cat">AI · Retrieval</div><div class="proj-name">RAG QA Bot</div><div class="proj-desc">Built for a real problem — my father's wholesale business drowns in customer queries. Upload any business document; customers get instant, source-cited answers from GPT without manual work.</div><div class="proj-tech">Python · OpenAI · Pinecone · Flask</div></div>
+      <div class="proj-item reveal"><div class="proj-n">03</div><div class="proj-cat">AI · Voice</div><div class="proj-name">AI Voice Calling Assistant</div><div class="proj-desc">Replaces the personal assistant. Calls executives about meetings, gets verbal confirmation, marks attendance on a daily report, and sends GPT-written invites to participants — zero human involvement.</div><div class="proj-tech">Python · Flask · Twilio · OpenAI · Google Calendar API</div></div>
+      <div class="proj-item reveal"><div class="proj-n">04</div><div class="proj-cat">Automation · n8n</div><div class="proj-name">AI Recruiter Agent</div><div class="proj-desc">End-to-end recruitment automation. Screens resumes with AI, notifies recruiters via Telegram, schedules interviews into Google Calendar — no manual steps between application and interview.</div><div class="proj-tech">n8n · OpenAI · Telegram Bot API · Google Calendar</div></div>
+      <div class="proj-item reveal"><div class="proj-n">05</div><div class="proj-cat">AI · Healthcare</div><div class="proj-name">MediReminder</div><div class="proj-desc">Hospital medication tracking system. Nurses tick doses. Doctors get real-time visibility. AI generates 15 or 30-day patient progress reports from nurse feedback notes — 50+ entries become a 2-minute doctor summary.</div><div class="proj-tech">React · TypeScript · Python · Flask · OpenAI</div></div>
+      <div class="proj-item reveal"><div class="proj-n">06</div><div class="proj-cat">Open Source</div><div class="proj-name">ai-code-optimizer</div><div class="proj-desc">Contributed CI/CD workflow with linting pipeline and VSIX build configuration to an open source AI code optimization project. PR #3 merged into main branch.</div><div class="proj-tech">TypeScript · GitHub Actions · CI/CD</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-inner">
+    <div class="s-header reveal"><span class="s-num">04</span><h2 class="s-title">Technical <em>Skills</em></h2></div>
+    <div class="skills-layout">
+      <div class="reveal"><div class="sk-cat-name">AI & Automation</div><ul class="sk-list"><li>OpenAI API</li><li>RAG Systems</li><li>n8n Workflows</li><li>AI Agents</li><li>Pinecone</li><li>LLMs</li></ul></div>
+      <div class="reveal"><div class="sk-cat-name">Programming</div><ul class="sk-list"><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>Flask</li><li>REST APIs</li></ul></div>
+      <div class="reveal"><div class="sk-cat-name">Web</div><ul class="sk-list"><li>HTML & CSS</li><li>React</li><li>Tailwind CSS</li><li>Vite</li></ul></div>
+      <div class="reveal"><div class="sk-cat-name">Blockchain</div><ul class="sk-list"><li>Cardano</li><li>Aiken</li><li>Plutus</li><li>Smart Contract Security</li></ul></div>
+      <div class="reveal"><div class="sk-cat-name">Tools</div><ul class="sk-list"><li>Git & GitHub</li><li>Twilio</li><li>VS Code</li><li>Google Cloud</li></ul></div>
+      <div class="reveal"><div class="sk-cat-name">Business</div><ul class="sk-list"><li>Operations Management</li><li>Inventory Control</li><li>Vendor Negotiation</li><li>Cash Flow</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="s-inner">
+    <div class="s-header reveal"><span class="s-num">05</span><h2 class="s-title">Recognition &amp; <em>Achievements</em></h2></div>
+    <div class="ach-grid">
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>Top 112 Teams Globally — Cardano Hackathon Asia IBW 2025, Bengaluru</strong><span>Smart contract security auditor shortlisted worldwide</span></div></div>
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>1st Prize — Inter-college Poster Design Contest</strong><span>Bishop Ambrose College</span></div></div>
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>Google Cloud Innovator Badge · Document AI · Google Skills Badge</strong><span>Google Developer Program · Google Cloud</span></div></div>
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>5-Day AI Agents Intensive Course — Google / Kaggle</strong><span>Agentic AI Day 2025 · Python Coder Badge — Kaggle</span></div></div>
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>Appian AI Application Challenge — IIT Madras, Shaastra 2025</strong><span>Participant</span></div></div>
+      <div class="ach-item reveal"><div class="ach-mark">✦</div><div class="ach-body"><strong>Shortlisted — AICTE National Internship Portal</strong><span>Penetration Tester · Komal Vision Scholars Program 2025</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-inner">
+    <div class="contact-big reveal">Let's<br><em>work together</em></div>
+    <div class="contact-row reveal">
+      <a href="mailto:tharuna0111@gmail.com" class="c-link primary">tharuna0111@gmail.com</a>
+      <a href="https://github.com/Era-Of-Tharuna" target="_blank" class="c-link">GitHub</a>
+      <a href="https://linkedin.com/in/tharuna-rajpurohit" target="_blank" class="c-link">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-copy">© 2025 Tharuna Rajpurohit</div>
+  <div class="f-status"><div class="f-dot"></div>Open to remote opportunities</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx-4+'px';cur.style.top=my-4+'px';});
+setInterval(()=>{tx+=(mx-tx)*0.1;ty+=(my-ty)*0.1;cur2.style.left=tx-18+'px';cur2.style.top=ty-18+'px';},16);
+document.querySelectorAll('a,button,.proj-item,.exp-item,.ach-item,.an-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(3)';cur2.style.transform='scale(0.6)';cur2.style.borderColor='rgba(200,169,110,0.55)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';cur2.style.transform='scale(1)';cur2.style.borderColor='rgba(200,169,110,0.28)';});
+});
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),50);obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
